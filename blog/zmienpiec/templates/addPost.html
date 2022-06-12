@@ -1,20 +1,18 @@
-{% extends 'layout.html' %}
-
-{%block title%}
-    Dodaj nowy post
-{%endblock%}
-
+{% extends 'layout.html' %} {%block title%} Dodaj nowy post {%endblock%}
 {%block content%}
 
-<div class="row">
-
-<h1>Post</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
+<div class="row mt-5">
+  {%if perms.zmienpiec.add_post %}
+  <h1>Post</h1>
+  <form method="POST">
+    {% csrf_token %} {{form.media}} {{form.as_p}}
     <button>Dodaj</button>
-
-</form>
-
+  </form>
+  {%else%}
+  <div class="col-12 mt-5">
+    <h2 class="text-danger">Nie posiadasz odpowiednich uprawnień.</h2>
+  </div>
+  
+  {%endif%}
 </div>
 {%endblock%}
