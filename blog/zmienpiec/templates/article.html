@@ -7,22 +7,31 @@
   <a>{{post.body|safe}}</a>
 </div>
 
-
-{%if not post.comments.all%}
+{%if user.is_authenticated%}
+<div class="row">
+  <form method="POST">
+    {% csrf_token %} {{form.as_p}}
+    <button class="btn btn-primary">Dodaj komentarz</button>
+  </form>
+</div>
+<script>
+    var elem = document.getElementById("authorInput");
+    var elem2 = document.getElementById("postInput");
+    if (elem != null && elem2!=null) {
+      elem.value = "{{user.id}}";
+      elem2.value="{{post.id}}"
+    }
+</script>
+{%endif%} {%if not post.comments.all%}
 
 <div class="row">
-    <h3 class="text-muted">Brak komentarzy do wyświetlenia...</h3>
+  <h3 class="text-muted">Brak komentarzy do wyświetlenia...</h3>
 </div>
 {%else%}
-
+<div class="row">
+    <h3 class="text-muted">Komentarze:</h3>
+  </div>
 {%for comment in post.comments.all|dictsortreversed:"create_date"%}
-<div class="row p-3 border my-3">
-    {{comment.author}}
-    {{comment.body}}
-</div>
+<div class="row p-3 border my-3">{{comment.author}} {{comment.body}}</div>
 
-{%endfor%}
-
-{%endif%}
-
-{%endblock%}
+{%endfor%} {%endif%} {%endblock%}
