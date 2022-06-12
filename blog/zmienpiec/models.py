@@ -1,5 +1,6 @@
 from statistics import mode
 from turtle import title
+from xmlrpc.client import DateTime
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -17,3 +18,14 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("article", args=(str(self.id)))
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(
+        Post, related_name='comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField()
+    create_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return str(self.author)+' | '+self.post.title + ' | ' + self.body[slice(50)]
