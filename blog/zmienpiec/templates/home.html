@@ -7,7 +7,7 @@
     <div class="row mt-3 border">
       <a href="{% url 'article' post.pk %}">{{post.title}}</a><br />
       {{post.author}}<br />
-      {{post.body}}<br />
+      {{post.body|slice:":200"|safe}}<br />
     </div>
 
     {%endfor%}
