@@ -10,13 +10,15 @@ def home(request):
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
+    ordering = ['-create_date']
 
 
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article.html'
 
+
 class AddPostView(CreateView):
-    model= Post
+    model = Post
     template_name = 'addPost.html'
     fields = '__all__'
