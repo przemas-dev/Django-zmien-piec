@@ -8,11 +8,16 @@
     {% csrf_token %} {{form.media}} {{form.as_p}}
     <button>Dodaj</button>
   </form>
+  <script>
+    var elem = document.getElementById("authorInput");
+    if (elem != null) {
+      elem.value = "{{user.id}}";
+    }
+  </script>
   {%else%}
   <div class="col-12 mt-5">
     <h2 class="text-danger">Nie posiadasz odpowiednich uprawnień.</h2>
   </div>
-  
   {%endif%}
 </div>
 {%endblock%}
