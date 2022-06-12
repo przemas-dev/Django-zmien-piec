@@ -1,3 +1,6 @@
+{% extends 'layout.html' %}
+{%block content%}
+
 <h1>Post</h1>
 
 {% for post in object_list%}
@@ -5,3 +8,4 @@
     {{post.author}}<br />
     {{post.body}}<br />
 {%endfor%}
+{%endblock%}
