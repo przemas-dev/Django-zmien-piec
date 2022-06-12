@@ -1,23 +1,30 @@
 {% extends 'layout.html' %} {%block title%} Dodaj nowy post {%endblock%}
 {%block content%}
 
-<div class="row mt-5">
-  {%if perms.zmienpiec.add_post %}
-  <h1>Post</h1>
-  <form method="POST">
-    {% csrf_token %} {{form.media}} {{form.as_p}}
-    <button>Dodaj</button>
-  </form>
-  <script>
-    var elem = document.getElementById("authorInput");
-    if (elem != null) {
-      elem.value = "{{user.id}}";
-    }
-  </script>
-  {%else%}
-  <div class="col-12 mt-5">
-    <h2 class="text-danger">Nie posiadasz odpowiednich uprawnień.</h2>
+<div class="jumbotron jumbotron-fluid banner banner1 h-20vh">
+    <div class="container">
+        <h1 class="text-light">Dodaj nowy Post</h1>
+    </div>
+</div>
+
+<div class="container">
+  <div class="row mt-5">
+    {%if perms.zmienpiec.add_post %}
+    <form method="POST">
+      {% csrf_token %} {{form.media}} {{form.as_p}}
+      <button class="btn btn-primary">Dodaj</button>
+    </form>
+    <script>
+      var elem = document.getElementById("authorInput");
+      if (elem != null) {
+        elem.value = "{{user.id}}";
+      }
+    </script>
+    {%else%}
+    <div class="col-12 mt-5">
+      <h2 class="text-danger">Nie posiadasz odpowiednich uprawnień.</h2>
+    </div>
+    {%endif%}
   </div>
-  {%endif%}
 </div>
 {%endblock%}

@@ -1,0 +1,41 @@
+.border1{
+    box-shadow: 2px 2px 20px rgba(107,165,213,0.3);
+}
+
+a:hover{
+    text-decoration: none;
+    color: black;
+}
+a{
+    color: black;
+}
+
+h1, h2, h3, h4, h5, h6{
+    margin-bottom: .5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+.h1{
+    font-size: 2.5rem;
+}
+.h-60vh{
+    height: 60vh;
+}
+.h-20vh{
+    height: 20vh;
+}
+.banner {
+    background-attachment: fixed;
+    background-position: 50% 50%;
+    background-size: cover;
+    -webkit-background-size: cover;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+
+.banner1{
+    background-image: url("../images/piec-banner.jpg");
+}
