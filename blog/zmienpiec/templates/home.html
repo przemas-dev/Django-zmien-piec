@@ -12,18 +12,26 @@
     <div class="col-lg-4"></div>
     <div class="col-lg-8 container-fluid">
       {% for post in object_list%}
-      <div class="row mt-3 border1 py-3">
-        <div class="col-12 d-flex p-3 flex-column">
+      <div class="row my-5 border1 py-3">
+        <div class="col-sm-4 p-sm-3 p-4">
+            <img class="img-fluid mx-auto d-block img-thumbnail" src="{{post.header_image.url}}">
+        </div>
+        <div class="col-sm-8 d-flex p-3 flex-column">
           <a href="{% url 'article' post.pk %}">
             <h2 class="text-center">{{post.title}}</h2>
           </a>
           <hr class="mx-5" />
-          <p class="mb-auto">{{post.body|slice:":200"|safe}}</p>
-          <div class="d-flex justify-content-between">
-            <span>{{post.create_date}} ~ {{post.author}} </span>
-            <a class="text-info mr-3" href="{% url 'article' post.pk %}"
-              >Czytaj całość...</a
-            >
+          {{post.body|slice:":200"|safe}}
+          <div class="d-flex mt-auto justify-content-between">
+            <span>{{post.create_date}} ~ {{post.author.first_name}} {{post.author.last_name}} </span>
+            <div>
+                <a class="text-info mr-3" href="{% url 'article' post.pk %}"
+                >Czytaj całość...</a>
+                {%if perms.zmienpiec.delete_post %}
+                <a class="text-danger mr-3" href="{% url 'deletePost' post.pk %}"
+                >Usuń</a>
+                {% endif%}
+            </div>
           </div>
         </div>
       </div>

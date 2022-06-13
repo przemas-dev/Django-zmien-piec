@@ -1,19 +1,14 @@
-{% extends 'layout.html' %}
-
-{%block title%}
-    Zaloguj się
-{%endblock%}
-
+{% extends 'layout.html' %} {%block title%} Zaloguj się {%endblock%} 
 {%block content%}
 
-<div class="row mt-5">
-
-<h1 class="mb-3">Zaloguj się</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button class="btn btn-primary">Zaloguj</button>
-
-</form>
+<div class="container">
+  <div class="row mt-5 d-flex flex-column">
+    <h1 class="mb-3">Zaloguj się</h1>
+    <br/>
+    <form method="POST">
+      {% csrf_token %} {{form.as_p}}
+      <button class="btn btn-primary">Zaloguj</button>
+    </form>
+  </div>
 </div>
 {%endblock%}

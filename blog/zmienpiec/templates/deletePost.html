@@ -3,23 +3,19 @@
 
 <div class="jumbotron jumbotron-fluid banner banner1 h-20vh">
     <div class="container">
-        <h1 class="text-light">Dodaj nowy Post</h1>
+        <h1 class="text-light">Usuń post</h1>
     </div>
 </div>
 
 <div class="container">
   <div class="row mt-5">
-    {%if perms.zmienpiec.add_post %}
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %} {{form.media}} {{form.as_p}}
-      <button class="btn btn-primary">Dodaj</button>
+    {%if perms.zmienpiec.delete_post %}
+    <form method="POST">
+      {% csrf_token %} 
+      <h4></h4>
+      <h3 class="font-weight-bold"> Czy na pewno chcesz usunąć ten post?</h3>
+      <button class="btn btn-danger">Usuń</button>
     </form>
-    <script>
-      var elem = document.getElementById("authorInput");
-      if (elem != null) {
-        elem.value = "{{user.id}}";
-      }
-    </script>
     {%else%}
     <div class="col-12 mt-5">
       <h2 class="text-danger">Nie posiadasz odpowiednich uprawnień.</h2>

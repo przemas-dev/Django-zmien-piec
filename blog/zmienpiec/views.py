@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.views.generic.edit import FormMixin
 from .models import Post
 from .forms import PostForm, CommentForm
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+# from django.shortcuts import render_to_response
+from django.template import RequestContext
 
 
 class HomeView(ListView):
@@ -18,7 +20,7 @@ class ArticleDetailView(FormMixin, DetailView):
     form_class = CommentForm
 
     def get_success_url(self) -> str:
-        return reverse('article', args=(str(self.object.id)))
+        return reverse('article', args=[str(self.object.id)])
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
@@ -42,3 +44,15 @@ class AddPostView(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'addPost.html'
+
+
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'deletePost.html'
+    success_url = reverse_lazy('home')
+
+
+def handler404(request, exception, template_name="404.html"):
+    response = render_to_response(template_name,context_instance=RequestContext(request))
+    response.status_code = 400
+    return response

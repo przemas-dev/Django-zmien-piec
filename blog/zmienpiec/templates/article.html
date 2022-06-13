@@ -9,41 +9,83 @@
 
 <div class="container">
   <div class="row mt-5">
-    <div>
-      <h1>{{post.title}}</h1>
-      <hr />
-      <a>{{post.body|safe}}</a>
+    <div class="col-lg-8 container-fluid">  
+        <article class="border1 row py-4 mb-5">
+            <div class="col-12 mb-3">
+                <i class="fa fa-quote-left text-info"></i>
+                <h2 class="mx-2 text-center">{{post.title}}</h2>
+                <hr class="mx-5" />
+            </div>
+            <div class="col-12 my-sm-4 my-2">
+                <img
+                  class="img-fluid mx-auto d-block"
+                  src="{{post.header_image.url}}"
+                />
+              </div>
+              <div class="col-12">
+                <div class="mb-4 w-100 overflow-hidden" style="">
+                  {{post.body|safe}}
+                  <span class="text-muted pull-left" style="font-size: 12px"
+                    >{{post.author.first_name}} {{post.author.last_name}} | {{post.create_date}}</span>
+                  <br />
+                </div>
+              </div>
+        </article>
     </div>
-  </div>
+    <div class="col-lg-4">
 
-  {%if user.is_authenticated%}
-  <div class="row">
-    <form method="POST">
-      {% csrf_token %} {{form.as_p}}
-      <button class="btn btn-primary">Dodaj komentarz</button>
-    </form>
-  </div>
-  <script>
-    var elem = document.getElementById("authorInput");
-    var elem2 = document.getElementById("postInput");
-    if (elem != null && elem2 != null) {
-      elem.value = "{{user.id}}";
-      elem2.value = "{{post.id}}";
-    }
-  </script>
-  {%endif%} {%if not post.comments.all%}
-
-  <div class="row">
-    <h3 class="text-muted">Brak komentarzy do wyświetlenia...</h3>
-  </div>
-  {%else%}
-  <div class="row">
-    <h3 class="text-muted">Komentarze:</h3>
-  </div>
-  {%for comment in post.comments.all|dictsortreversed:"create_date"%}
-  <div class="row p-3 border my-3">{{comment.author}} {{comment.body}}</div>
-
-  {%endfor%} {%endif%}
+    </div>
 </div>
 
-{%endblock%}
+    {%if user.is_authenticated%}
+    <div class="row mt-5 border1 p-3">
+      <form class="col-12" method="POST">
+        {% csrf_token %} {{form.as_p}}
+        <button class="btn btn-primary">Dodaj komentarz</button>
+      </form>
+    </div>
+    <script>
+      var elem = document.getElementById("authorInput");
+      var elem2 = document.getElementById("postInput");
+      if (elem != null && elem2 != null) {
+        elem.value = "{{user.id}}";
+        elem2.value = "{{post.id}}";
+      }
+    </script>
+
+    {%else%}
+    <div class="row mt-5  p-3">
+        <h3 class="">Zaloguj się aby dodać komentarz</h3>
+    </div>
+
+    {%endif%} 
+
+
+    
+    
+    {%if not post.comments.all%}
+
+    <div class="row  p-3 my-5">
+      <h3 class="text-muted">Brak komentarzy do wyświetlenia...</h3>
+    </div>
+    {%else%}
+    <div class="row  my-3">
+      <h3 class="text-muted">Komentarze:</h3>
+    </div>
+    {%for comment in post.comments.all|dictsortreversed:"create_date"%}
+    <div class="row border1 p-3 my-3">
+        <div class="col-12">
+            {{comment.create_date}} <span class="font-weight-bold">{{comment.author.first_name}} {{comment.author.last_name}}</span>:
+        </div>
+        <div class="col-12">
+            <p class="border rounded p-2 bg-light rounded-lg">
+                {{comment.body}}
+            </p>
+        </div>
+    </div>
+
+    {%endfor%} {%endif%}
+  </div>
+
+  {%endblock%}
+</div>
