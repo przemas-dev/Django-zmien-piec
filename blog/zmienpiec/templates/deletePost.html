@@ -12,7 +12,9 @@
     {%if perms.zmienpiec.delete_post %}
     <form method="POST">
       {% csrf_token %} 
-      <h4></h4>
+      <h4>{{post.title}}</h4>
+      <h4>{{post.author}} {{post.author.first_name}} {{post.author.last_name}}</h4>
+      <h4>{{post.create_date}}</h4>
       <h3 class="font-weight-bold"> Czy na pewno chcesz usunąć ten post?</h3>
       <button class="btn btn-danger">Usuń</button>
     </form>

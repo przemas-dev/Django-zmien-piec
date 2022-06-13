@@ -9,7 +9,13 @@
 
 <div class="container">
   <div class="row mt-5">
-    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+      <h2>Witaj,</h2>
+      <h3>na stronie Zmień Piec - </h3>
+      <p>blogu podejmującym wielce istotny temat nowoczesnych piecy - szczególnie ważny w
+        czasach rosnącego zanieczyszczenia powietrza spowodowanego spalaniem wszelkiego rodzaju paliw i
+        materiałów w nieefektywny i wysokoemisyjny sposób.</p>
+    </div>
     <div class="col-lg-8 container-fluid">
       {% for post in object_list%}
       <div class="row my-5 border1 py-3">
@@ -21,7 +27,7 @@
             <h2 class="text-center">{{post.title}}</h2>
           </a>
           <hr class="mx-5" />
-          {{post.body|slice:":200"|safe}}
+          {{post.body|slice:":200"|safe}}...
           <div class="d-flex mt-auto justify-content-between">
             <span>{{post.create_date}} ~ {{post.author.first_name}} {{post.author.last_name}} </span>
             <div>

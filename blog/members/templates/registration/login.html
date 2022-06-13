@@ -5,10 +5,24 @@
   <div class="row mt-5 d-flex flex-column">
     <h1 class="mb-3">Zaloguj się</h1>
     <br/>
-    <form method="POST">
-      {% csrf_token %} {{form.as_p}}
-      <button class="btn btn-primary">Zaloguj</button>
-    </form>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="form-group">
+          
+          <label for="{{ form.username.id_for_label }}">Nazwa użytkownika:</label>
+          <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="username" required>
+          {{ form.username.errors }}
+  
+      </div>
+      <div class="form-group">
+         
+          <label for="{{ form.password.id_for_label }}">Hasło:</label>
+          <input type="password" class="form-control" id="{{ form.password.id_for_label }}" name="password" required>
+          {{ form.password.errors }}
+      </div>
+      <button type="submit" class="btn btn-primary">Zaloguj</button>
+  </form>
   </div>
 </div>
 {%endblock%}
